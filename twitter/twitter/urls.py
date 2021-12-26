@@ -21,5 +21,6 @@ from tweets.views import tweet_content, all_tweets_of_current_user, create_tweet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tweets/', include('tweets.urls')),
-    path('api/profiles/',include('profiles.urls'))
+    path('api/profiles/',include('profiles.urls')),
+    path('api/auth/', include('userauth.urls')),
 ]

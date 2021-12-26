@@ -46,6 +46,7 @@ def all_tweets_of_current_user(request):
 @permission_classes([IsAuthenticated])
 def all_tweets(request):
     """Returns all tweets of all the users."""
+    
     tweet_qs = Tweet.objects.all()
 
     serializer = TweetSerializer(tweet_qs,many=True)
@@ -66,8 +67,6 @@ def tweet_content(request,tweet_id):
 
     serializer = TweetSerializer(tweet)
 
-    print(tweet_id,request.user)
-    print(tweet[0].content)
     return Response(serializer.data)
 
 
@@ -81,7 +80,7 @@ def show_feed(request):
 
     # followed user posts
     other_user_tweet_qs = Tweet.objects.filter(user__in = request.user.profile.following.all())
-    
+
     # merging both querysets
     final_qs = me_tweets_qs | other_user_tweet_qs  
 
@@ -100,11 +99,15 @@ def delete_tweet(request, tweet_id):
     """Deletes a specific tweet.
         :param tweet_id: The ID of the tweet
     """
+
+    # Extracting the tweet
     tweet_qs = Tweet.objects.filter(id=tweet_id)   
 
+    # Verifing if the tweet exist
     if not tweet_qs.exists():
         return Response({"msg":"tweet not found!!!"},status = 400) 
 
+    # If the tweet belong to the logged in user
     qs = tweet_qs.filter(user=request.user)
 
     if not qs.exists():

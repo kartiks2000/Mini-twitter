@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import tweet_content, all_tweets_of_current_user, create_tweet, delete_tweet, all_tweets, show_feed
 
-# BASE "api/tweet/"
+# BASE "api/tweets/"
 
 urlpatterns = [
     path('tweet/<int:tweet_id>',tweet_content),
