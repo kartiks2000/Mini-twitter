@@ -8,6 +8,9 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Tweet
+from profiles.models import Profile
+
+from django.contrib.auth.models import User
 
 from .serializers import TweetSerializer
 
@@ -65,6 +68,29 @@ def tweet_content(request,tweet_id):
 
     print(tweet_id,request.user)
     print(tweet[0].content)
+    return Response(serializer.data)
+
+
+@api_view(['POST','GET'])
+@permission_classes([IsAuthenticated])
+def show_feed(request):
+    """Shows all the tweets by the user and the followed users."""   
+
+    # Current users posts
+    me_tweets_qs = Tweet.objects.filter(user = request.user)
+
+    # followed user posts
+    other_user_tweet_qs = Tweet.objects.filter(user__in = request.user.profile.following.all())
+    
+    # merging both querysets
+    final_qs = me_tweets_qs | other_user_tweet_qs  
+
+    # Sorting the tweets    
+    final_qs = final_qs.order_by('-created')
+
+    serializer = TweetSerializer(final_qs,many=True)
+
+
     return Response(serializer.data)
 
 
