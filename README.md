@@ -14,7 +14,7 @@ The features emplimented are -:
 1. Display Feed
 1. Follow other users
 2. Unfollow users
-
+etc....
 
 ## Install virtualenv
 
