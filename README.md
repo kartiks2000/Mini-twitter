@@ -1,5 +1,6 @@
 # Mini-twitter
 
+#### Please refer to the attached PDF, for ellabarate information regarding all the end points.
 
 ### A social media service build using django.
 
