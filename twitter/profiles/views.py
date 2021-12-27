@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from rest_framework.response import Response
 from django.http import Http404, response
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -35,6 +36,22 @@ def profile_detail(request,username):
     profile_obj = qs.first()
     serializer = ProfileSerializer(profile_obj)
     print(profile_obj.bio)
+
+    return Response(serializer.data)
+
+
+@api_view(['POST','GET'])
+@permission_classes([IsAuthenticated])
+def current_user_profile(request):
+    '''Returns profile of current user.'''
+
+    me_qs = Profile.objects.filter(user = request.user)
+
+    if not me_qs.exists():
+        raise Http404
+    
+    me = me_qs.first()
+    serializer = ProfileSerializer(me)
 
     return Response(serializer.data)
 
