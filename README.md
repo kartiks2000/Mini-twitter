@@ -40,62 +40,10 @@ The features emplimented are -:
 
     http://127.0.0.1:8000/
     
+## All the end points of the API
     
-## BASE = http://127.0.0.1:8000/api/
-
-### Auth “auth/“
-
-# Signup “signup/<str:username>/<str:password>/<str:email>”
-## Signing in as a new user.
-
-# Login “login/<str:username>/<str:password>”
-## Logging in the existing user.
-
-Logout “signup/<str:username>/<str:password>/<str:email>”
-Logout the currently logged in user.
+    https://docs.google.com/document/d/18wUoyaRCtiIVO9E_8qnY9tE0wUJ2IS1UZ7XN78KULo4/edit?usp=sharing
 
 
-Tweets   “tweets/”
-
-Create Tweet “create/<str:tweet_content>”
-Creates a new tweet for the currently logged in user.
-
-Delete Tweet “delete/<int:tweet_id>”
-Deleted the tweet mentioned by the user if and only if the tweet belongs to the currently logged in user.
-
-Specific tweet “tweet/<int:tweet_id>”
-Shows content of a specific tweet.
-
-All tweets of current user “alltweetsofuser”
-Returns all the tweets of the current user.
-
-All tweets “alltweets“
-Returns the tweets of all the users on the platform.
-
-Feed “feed”
-Return tweets of currently logged in users and the followed users.
-
-
-Profiles “profiles/“
-
-Specific user profile “profile/<str:username>”
-Shows the profile of currently logged in user
-
-All users/profile “allprofiles”
-Returns all the users on the platform
-
-Followed users “followedusers”
-Returns all the followed users.
-
-Currently logged in user “currentprofile”
-Returns the currently logged in user profile
-
-Follow user “follow_unfollow/<str:username>/follow”
-Follow the specific user.
-
-Follow user “follow_unfollow/<str:username>/unfollow”
-Unfollow the specific user.
-    
-    
     
 # THANKS & REGARDS    
