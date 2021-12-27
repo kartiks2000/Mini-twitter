@@ -41,15 +41,15 @@ The features emplimented are -:
     http://127.0.0.1:8000/
     
     
-BASE = http://127.0.0.1:8000/api/
+## BASE = http://127.0.0.1:8000/api/
 
-Auth “auth/“
+### Auth “auth/“
 
-Signup “signup/<str:username>/<str:password>/<str:email>”
-Signing in as a new user.
+# Signup “signup/<str:username>/<str:password>/<str:email>”
+## Signing in as a new user.
 
-Login “login/<str:username>/<str:password>”
-Logging in the existing user.
+# Login “login/<str:username>/<str:password>”
+## Logging in the existing user.
 
 Logout “signup/<str:username>/<str:password>/<str:email>”
 Logout the currently logged in user.
