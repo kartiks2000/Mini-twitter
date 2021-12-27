@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework.decorators import api_view
 
 
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
 
 
-
+@api_view(['POST','GET'])
 def user_login(request,username,password):
     '''Logs in the existing user.
         :param username: username
@@ -23,6 +24,7 @@ def user_login(request,username,password):
     return HttpResponse("<h1>Welcome back</h1>")
 
 
+@api_view(['POST','GET'])
 def user_signup(request,username,password,email):
     '''Creates new user.
         :param username: username
@@ -43,7 +45,7 @@ def user_signup(request,username,password,email):
     return HttpResponse("<h1>Glad to have you on board!!</h1>")
 
 
-
+@api_view(['POST','GET'])
 def user_logout(request):
     '''Logs out the currently loggedin user.'''
     

@@ -9,7 +9,7 @@ from .models import Profile
 
 from django.contrib.auth.models import User
 
-from .serializer import ProfileSerializer
+from .serializer import ProfileSerializer, UserSerializer
 
 @api_view(['POST','GET'])
 @permission_classes([IsAuthenticated])
@@ -81,4 +81,16 @@ def follow_unfollow_profiles(request,username,action):
 
     return Response({},status=200)     
 
-        
+
+@api_view(['POST','GET'])
+@permission_classes([IsAuthenticated])
+def followed_users(request):
+    """Returns all the followed users"""
+
+    qs = Profile.objects.filter(user = request.user)
+
+    me = qs.first()
+
+    serializer = UserSerializer(me.following.all(),many=True)
+
+    return Response(serializer.data)

@@ -5,11 +5,13 @@ from .models import Profile
 
 
 class UserSerializer(serializers.ModelSerializer):
+    '''Serializes the user object.'''
     class Meta:
         model = User
         fields = ['username']  
 
 class ProfileSerializer(serializers.ModelSerializer):
+    '''Serializes the Profile objects.'''
 
     user = UserSerializer()
 

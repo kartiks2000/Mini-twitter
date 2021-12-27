@@ -17,17 +17,20 @@ from .serializers import TweetSerializer
 @api_view(['POST','GET'])
 @permission_classes([IsAuthenticated])
 def create_tweet(request, tweet_content):
+    '''Creating a new tweet.'''
 
-    # serializer = TweetSerializer(data=)
+    if len(tweet_content) > 140:
+        return Response("<h1>Sorry too long...</h1>")
+
     tweet = Tweet.objects.create(user=request.user,content=tweet_content)
+    tweet.save()
+    
 
-    print(tweet.created)
-
-    return Response("<h1>created!!</h1>")
+    return Response("<h1>Huray!!! Tweet created!!</h1>")
 
 
 # All tweets of the current user
-@api_view(['GET'])
+@api_view(['GET','POST'])
 # @authentication_classes([authentication_classes])
 @permission_classes([IsAuthenticated])
 def all_tweets_of_current_user(request):
@@ -41,7 +44,7 @@ def all_tweets_of_current_user(request):
 
 
 # All tweets of all users
-@api_view(['GET'])
+@api_view(['GET','POST'])
 # @authentication_classes([authentication_classes])
 @permission_classes([IsAuthenticated])
 def all_tweets(request):
@@ -55,7 +58,7 @@ def all_tweets(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 # @authentication_classes([authentication_classes])
 @permission_classes([IsAuthenticated])
 def tweet_content(request,tweet_id):

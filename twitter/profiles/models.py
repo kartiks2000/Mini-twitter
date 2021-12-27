@@ -10,6 +10,9 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     following = models.ManyToManyField(User,related_name='following',blank=True)
 
+    def __str__(self):
+        return 'USERNAME: {}'.format(self.user)
+
 
 def user_did_save(sender, instance, created, *args, **kwargs):
     if created:
